@@ -1,0 +1,23 @@
+# Fichiers de logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.log
+
+# Fichier de débogage de l'IDE
+*.nyc_output
+
+# Dossiers générés à la runtime
+node_modules
+jspm_packages
+
+# Fichier d'environnement local (où vous pourriez stocker des secrets ou des configurations spécifiques à votre machine locale)
+.env
+
+# Fichiers de cache
+.cache
