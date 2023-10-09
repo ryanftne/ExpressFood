@@ -181,11 +181,70 @@ app.post('/api/vehicles', async (req, res) => {
 });
 
 app.post('/api/orders', async (req, res) => {
+    console.log("Data received:", req.body);  // Log des données reçues
     try {
         const newOrder = new Order(req.body);
         await newOrder.save();
         res.status(201).send(newOrder);
     } catch (error) {
+        console.error("Error:", error);  // Log des erreurs
         res.status(400).send({ error: 'Failed to add order' });
+    }
+});
+
+app.get('/api/orders', async (req, res) => {
+    try {
+        const orders = await Order.find().populate('id_client food id_livreur statut');
+        res.status(200).send(orders);
+    } catch (error) {
+        res.status(400).send({ error: 'Failed to fetch orders' });
+    }
+});
+
+app.get('/api/orders/:id', async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id).populate('id_client food id_livreur statut');
+        if (order) {
+            res.status(200).send(order);
+        } else {
+            res.status(404).send({ message: 'Order not found' });
+        }
+    } catch (error) {
+        res.status(400).send({ error: 'Failed to fetch order' });
+    }
+});
+
+app.put('/api/orders/:id', async (req, res) => {
+    try {
+        const updatedOrder = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (updatedOrder) {
+            res.status(200).send(updatedOrder);
+        } else {
+            res.status(404).send({ message: 'Order not found' });
+        }
+    } catch (error) {
+        res.status(400).send({ error: 'Failed to update order' });
+    }
+});
+
+app.delete('/api/orders/:id', async (req, res) => {
+    try {
+        const deletedOrder = await Order.findByIdAndDelete(req.params.id);
+        if (deletedOrder) {
+            res.status(200).send({ message: 'Order deleted successfully' });
+        } else {
+            res.status(404).send({ message: 'Order not found' });
+        }
+    } catch (error) {
+        res.status(400).send({ error: 'Failed to delete order' });
+    }
+});
+
+app.get('/api/clients', async (req, res) => {
+    try {
+        const clients = await Client.find();
+        res.status(200).send(clients);
+    } catch (error) {
+        res.status(400).send({ error: 'Failed to fetch clients' });
     }
 });
