@@ -3,18 +3,14 @@ const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
 
-
-const Deliveryguy = require('./models/deliveryguy');
-const Food = require('./models/food');
-const Client = require('./models/client');
-const Review = require('./models/review');
-const Status = require('./models/status');
-const Categorie = require('./models/category'); 
-const Vehicle = require('./models/vehicle'); 
-const Order = require('./models/order'); 
-
 const clientRoutes = require('./routes/clients');
-const deliveryguyRoutes = require('./routes/deliveryguyRoutes');
+const deliveryguyRoutes = require('./routes/deliveryguys');
+const foodRoutes = require('./routes/foods');
+const reviewRoutes = require('./routes/reviews');
+const orderRoutes = require('./routes/orders');
+const categoryRoutes = require('./routes/category');
+const vehicleRoutes = require('./routes/vehicle');
+const statusRoutes = require('./routes/status');
 
 mongoose.connect('mongodb+srv://rfontaine:haha212@clusterexpressfood.f1o36c2.mongodb.net/Expressfood?retryWrites=true&w=majority', {
     useNewUrlParser: true,
@@ -38,52 +34,17 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
-// Ajout des routes pour les clients
+// Ajout des routes pour chaque composant
 app.use('/api/clients', clientRoutes);
-// Ajout des routes pour les clients
 app.use('/api/deliveryguys', deliveryguyRoutes);
+app.use('/api/foods', foodRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/statuses', statusRoutes);
 
 
-
-
-// app.post('/api/deliveryguys', async (req, res) => {
-//     try {
-//         const newDeliveryguy = new Deliveryguy(req.body);  // Créez une nouvelle instance du modèle avec les données de la requête
-//         await newDeliveryguy.save();  // Enregistrez le nouveau livreur dans la base de données
-//         res.status(201).send(newDeliveryguy);  // Répondez avec le livreur ajouté
-//     } catch (error) {
-//         res.status(400).send({ error: 'Failed to add deliveryguy' });
-//     }
-// });
-
-// app.post('/api/foods', async (req, res) => {
-//     try {
-//         const newFood = new Food(req.body);
-//         await newFood.save();
-//         res.status(201).send(newFood);
-//     } catch (error) {
-//         res.status(400).send({ error: 'Failed to add food' });
-//     }
-// });
-
-// app.post('/api/reviews', async (req, res) => {
-//     try {
-//         const newReview = new Review(req.body);
-//         await newReview.save();
-//         res.status(201).send(newReview);
-//     } catch (error) {
-//         res.status(400).send({ error: 'Failed to add review' });
-//     }
-// });
-
-// app.get('/api/foods', async (req, res) => {
-//     try {
-//         const foods = await Food.find();  // Trouve et retourne tous les aliments
-//         res.status(200).send(foods);
-//     } catch (error) {
-//         res.status(400).send({ error: 'Failed to fetch foods' });
-//     }
-// });
 
 // app.get('/api/foods/:id', async (req, res) => {
 //     try {
@@ -107,14 +68,6 @@ app.use('/api/deliveryguys', deliveryguyRoutes);
 //     }
 // });
 
-// app.get('/api/deliveryguys', async (req, res) => {
-//     try {
-//         const deliveryguys = await Deliveryguy.find();
-//         res.status(200).send(deliveryguys);
-//     } catch (error) {
-//         res.status(400).send({ error: 'Failed to fetch delivery guys' });
-//     }
-// });
 
 // app.put('/api/foods/:id', async (req, res) => {
 //     try {

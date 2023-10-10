@@ -31,6 +31,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Définissez d'autres routes pour mettre à jour, supprimer, obtenir un livreur par ID, etc.
+// Autres routes
 
 module.exports = router;
