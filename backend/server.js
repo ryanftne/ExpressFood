@@ -40,7 +40,7 @@ app.listen(PORT, () => {
 
 app.post('/api/clients', async (req, res) => {
     try {
-        console.log("Data received:", req.body)
+        //console.log("Data received:", req.body)
         // Hashage du mot de passe avant de stocker le client
         const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
         
@@ -49,7 +49,7 @@ app.post('/api/clients', async (req, res) => {
 
         const newClient = new Client(req.body);
         await newClient.save();
-        console.log("Client added:", newClient);
+        //console.log("Client added:", newClient);
         res.status(201).send(newClient);
     } catch (error) {
         console.error("Error while adding client:", error);
