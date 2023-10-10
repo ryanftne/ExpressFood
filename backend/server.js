@@ -47,12 +47,35 @@ app.post('/api/clients', async (req, res) => {
         req.body.password = hashedPassword;
 
         const newClient = new Client(req.body);
+        const uuid = require('uuid');
+        newClient.id = uuid.v4();
         await newClient.save();
         res.status(201).send(newClient);
     } catch (error) {
         res.status(400).send({ error: 'Failed to add client' });
     }
 });
+// app.post('/api/clients', async (req, res) => {
+//     try {
+//         console.log("Data received:", req.body); // Ajoutez cette ligne pour afficher les données reçues
+//         // Hashage du mot de passe avant de stocker le client
+//         const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+
+//         // Remplacement du mot de passe en clair par le mot de passe hashé
+//         req.body.password = hashedPassword;
+
+//         const newClient = new Client(req.body);
+//         const uuid = require('uuid');
+//         newClient.id = uuid.v4();
+//         await newClient.save();
+//         console.log("Client added:", newClient); // Ajoutez cette ligne pour afficher le client ajouté
+//         res.status(201).send(newClient);
+//     } catch (error) {
+//         console.error("Error while adding client:", error); // Ajoutez cette ligne pour afficher les erreurs
+//         res.status(400).send({ error: 'Failed to add client' });
+//     }
+// });
+
 
 app.post('/api/deliveryguys', async (req, res) => {
     try {
