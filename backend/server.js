@@ -21,11 +21,20 @@ require('dotenv').config(); // Assurez-vous d'avoir un fichier .env à la racine
 app.use(bodyParser.json());
 
 // Import des routes
-const userRoutes = require('./routes/userRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+const clientRoutes = require('./routes/clientRoutes');
+const authRoutes = require('./routes/authRoutes');
+const auth = require('./middleware/authMiddleware');
 
 // Utilisation des routes
-app.use('/api/users', userRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/clients', clientRoutes);
+app.use('/api/auth', authRoutes);
 //... autres routes
+
+app.get('/private-route', auth, (req, res) => {
+    res.send('This is a private route!');
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
