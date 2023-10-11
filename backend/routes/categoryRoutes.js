@@ -7,7 +7,8 @@ const categoryController = require('../controllers/categoryController');
 // Routes
 router.get('/', categoryController.getCategories);
 router.post('/', categoryController.submitCategory);
-
-//... autres routes pour supprimer, mettre à jour, etc.
+router.get('/:categoryId', categoryController.getCategory);
+router.put('/:categoryId', categoryController.updateCategory);
+router.delete('/:categoryId', categoryController.deleteCategory);
 
 module.exports = router;

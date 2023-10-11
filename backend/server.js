@@ -25,11 +25,15 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const clientRoutes = require('./routes/clientRoutes');
 const authRoutes = require('./routes/authRoutes');
 const auth = require('./middleware/authMiddleware');
+const foodRoutes = require('./routes/foodRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 
 // Utilisation des routes
 app.use('/api/categories', categoryRoutes);
 app.use('/api/clients', clientRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/foods', foodRoutes);
+app.use('/api/orders', orderRoutes);
 //... autres routes
 
 app.get('/private-route', auth, (req, res) => {
