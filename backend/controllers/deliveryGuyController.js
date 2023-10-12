@@ -1,5 +1,5 @@
 // controllers/deliveryGuyController.js
-const DeliveryGuy = require('../models/DeliveryGuy');
+const DeliveryGuy = require('../models/deliveryguy');
 
 // Obtenir tous les livreurs
 exports.getDeliveryGuys = async (req, res) => {
