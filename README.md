@@ -11,10 +11,10 @@ npm : Normalement installé automatiquement avec Node.js, vérifiez en exécutan
 
 ## Installation 
 
-1. Clonez le repository KaliexpressFood sur votre machine locale : 
-    ` git clone https://github.com/Kali07/KaliexpressFood.git `
+1. Clonez le repository ExpressFood sur votre machine locale : 
+    ` git clone https://github.com/Kali07/ExpressFood.git `
 2. Accédez au repertoire de l'application : 
-    `cd KaliexpressFood` 
+    `cd ExpressFood` 
 3. Installez les dépendances requises à l'aide de npm : 
     `npm install`
 
