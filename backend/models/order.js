@@ -19,9 +19,9 @@ const orderSchema = new mongoose.Schema({
     }],
     status: {
         type: String,
-        enum: ['new', 'preparing', 'delivering', 'delivered'],
+        enum: ['new', 'preparing', 'delivering', 'delivered', 'cancelled'],
         default: 'new'
-    },
+    },    
     orderTime: {
         type: Date,
         default: Date.now

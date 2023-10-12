@@ -60,10 +60,23 @@ exports.deleteOrder = async (req, res) => {
 exports.updateOrderStatus = async (req, res) => {
     try {
         const order = await Order.findById(req.params.orderId);
-        order.status = req.body.status; // le statut est passé dans le corps de la requête
+        if (!order) {
+            return res.status(404).send('Commande non trouvée');
+        }
+
+        // Vérifier si le nouveau statut est valide
+        const status = req.body.status;
+        if (!['new', 'preparing', 'delivering', 'delivered', 'cancelled'].includes(status)) {
+            return res.status(400).send('Statut invalide');
+        }
+
+        // Mettre à jour le statut
+        order.status = status;
         await order.save();
+
         res.json(order);
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        res.status(500).send('Erreur lors de la mise à jour du statut de la commande');
     }
 };
+
