@@ -1,18 +1,21 @@
+// models/deliveryGuy.js
 const mongoose = require('mongoose');
 
-const deliveryguySchema = new mongoose.Schema({
-    id_delivery: { type: String, unique: true },
-    name: String,
-    firstname: String,
-    statut: String,  // par exemple : disponible, en livraison, etc.
-    position: {
-        latitude: Number,
-        longitude: Number
+const deliveryGuySchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
     },
-    orders: [String],  // Liste des ID de commandes
-    vehicle: String,  // par exemple : vélo, moto, voiture, etc.
-    reviews: [String],  // Liste des avis
-    date: { type: Date, default: Date.now }  // Date d'ajout du livreur
+    phone: {
+        type: String,
+        required: true
+    },
+    status: {
+        type: String,
+        enum: ['available', 'delivering'],
+        default: 'available'
+    },
+    // autres champs nécessaires
 });
 
-module.exports = mongoose.model('Deliveryguy', deliveryguySchema);
+module.exports = mongoose.model('DeliveryGuy', deliveryGuySchema);

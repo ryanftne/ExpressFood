@@ -1,12 +1,40 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-    id_client: { type: mongoose.Schema.Types.ObjectId, ref: 'Client' }, // Relié à la table Client
-    food: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Food' }], // Relié à la table Food (en tant que liste car une commande peut avoir plusieurs aliments)
-    id_livreur: { type: mongoose.Schema.Types.ObjectId, ref: 'Deliveryguy' }, // Relié à la table Deliveryguy
-    statut: { type: mongoose.Schema.Types.ObjectId, ref: 'Status' }, // Relié à la table Status
-    total: Number,
-    date: { type: Date, default: Date.now }
+    client: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Client',
+        required: true
+    },
+    food: [{
+        item: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Food',
+            required: true
+        },
+        quantity: {
+            type: Number,
+            required: true
+        }
+    }],
+    status: {
+        type: String,
+        enum: ['new', 'preparing', 'delivering', 'delivered', 'cancelled'],
+        default: 'new'
+    },    
+    orderTime: {
+        type: Date,
+        default: Date.now
+    },
+    deliveryAddress: {
+        type: String,
+        required: true
+    },
+    deliveryGuy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'DeliveryGuy' // référence au modèle DeliveryGuy
+    }
+
 });
 
 module.exports = mongoose.model('Order', orderSchema);
