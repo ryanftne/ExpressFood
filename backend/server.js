@@ -27,6 +27,8 @@ const authRoutes = require('./routes/authRoutes');
 const auth = require('./middleware/authMiddleware');
 const foodRoutes = require('./routes/foodRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const deliveryGuyRoutes = require('./routes/deliverguyRoutes'); 
+const reviewRoutes = require('./routes/reviewRoutes');
 
 // Utilisation des routes
 app.use('/api/categories', categoryRoutes);
@@ -34,6 +36,8 @@ app.use('/api/clients', clientRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/foods', foodRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/deliveryguys', deliveryGuyRoutes); 
+app.use('/api/reviews', reviewRoutes);
 //... autres routes
 
 app.get('/private-route', auth, (req, res) => {
